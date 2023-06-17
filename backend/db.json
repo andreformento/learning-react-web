@@ -41078,5 +41078,37 @@
       "id": "_ev3lpu7rl",
       "name": "b"
     }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Johnson - Kutch",
+      "description": "Fully-configurable intermediate framework. Ullam occaecati libero laudantium nihil voluptas omnis qui modi qui.",
+      "imageUrl": "https://www.significadofacil.com/wp-content/uploads/2019/07/background-1200x800.jpg",
+      "contractTypeId": 3,
+      "contractSignedOn": "2013-08-04T22:39:41.473Z",
+      "budget": 54637,
+      "isActive": false
+    },
+    {
+      "id": 2,
+      "name": "Dillesik LLCs",
+      "description": "Re-contextualized dynamic moratorium. Aut nulla soluta numquam qui dolor architecto et facere dolores.",
+      "imageUrl": "https://www.shutterstock.com/image-photo/old-brick-black-color-wall-260nw-1605128917.jpg",
+      "contractTypeId": 6,
+      "contractSignedOn": "2016-06-26T18:24:01.706Z",
+      "budget": 29729,
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "Purdy, Keeling and Smithams",
+      "description": "Innovative 6th generation model. Perferendis libero qui iusto et ullam cum sint molestias vel.",
+      "imageUrl": "https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?w=2000",
+      "contractTypeId": 4,
+      "contractSignedOn": "2013-05-26T01:10:42.344Z",
+      "budget": 45660,
+      "isActive": true
+    }
   ]
 }
