@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// const okUrl = 'http://localhost:3001/photos?_page=1&_limit=100';
+// const okUrl = 'http://localhost:4000/photos?_page=1&_limit=100';
 // const notFoundErrorUrl = 'https://httpstat.us/404';
 // const forbiddenErrorUrl = 'https://httpstat.us/403';
 // const serverErrorUrl = 'https://httpstat.us/500';

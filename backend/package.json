@@ -4,6 +4,6 @@
   },
   "scripts": {
     "start": "serve -s",
-    "api": "json-server -p 3001 ./db.json"
+    "api": "json-server -p 4000 ./db.json"
   }
 }

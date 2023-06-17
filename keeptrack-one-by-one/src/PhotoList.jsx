@@ -1,6 +1,6 @@
 import React from "react";
 
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'http://localhost:4000';
 const url = `${baseUrl}/photos`;
 
 function translateStatusToErrorMessage(status) {
