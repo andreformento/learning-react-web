@@ -97,7 +97,16 @@ const itemAPI = {
 };
 
 function List(props) {
-    const { items, onRemove, onUpdate, onPaginate, loading, error } = props;
+    const {
+        items,
+        onRemove,
+        onUpdate,
+        onPaginate,
+        isDisabledPreviousPage,
+        isDisabledNextPage,
+        loading,
+        error,
+    } = props;
     const [editingItem, setEditingItem] = React.useState(null);
 
     const handleEditClick = (item) => {
@@ -130,8 +139,8 @@ function List(props) {
                         </li>
                     ))}
                 </ul>
-                <button onClick={() => onPaginate(-1)}>-1</button>
-                <button onClick={() => onPaginate(+1)}>+1</button>
+                <button disabled={isDisabledPreviousPage} className="pagination" onClick={() => onPaginate(-1)}>-1</button>
+                <button disabled={isDisabledNextPage} className="pagination" onClick={() => onPaginate(+1)}>+1</button>
             </div>
         );
     }
@@ -179,13 +188,17 @@ export default function CrudWithApi() {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(undefined);
     const [page, setPage] = React.useState(1);
+    const [isDisabledPreviousPage, setIsDisabledPreviousPage] = React.useState(true);
+    const [isDisabledNextPage, setIsDisabledNextPage] = React.useState(false);
+    const limit = 3;
 
     React.useEffect(() => {
         setLoading(true);
         itemAPI
-            .getAll(page)
+            .getAll(page, limit)
             .then((data) => {
                 setItems(data);
+                setIsDisabledNextPage(data.length < limit);
                 setLoading(false);
             })
             .catch((error) => {
@@ -236,7 +249,11 @@ export default function CrudWithApi() {
     };
 
     const changePage = (direction) => {
-        setPage((previousPage) => previousPage + direction);
+        setPage((previousPage) => {
+            const calculatedPage = previousPage + direction;
+            setIsDisabledPreviousPage(calculatedPage <= 1);
+            return calculatedPage;
+        });
     };
 
     return (
@@ -249,6 +266,8 @@ export default function CrudWithApi() {
                 onRemove={removeItem}
                 onUpdate={updateItem}
                 onPaginate={changePage}
+                isDisabledPreviousPage={isDisabledPreviousPage}
+                isDisabledNextPage={isDisabledNextPage}
             />
         </div>
     );

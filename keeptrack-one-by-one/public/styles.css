@@ -23,6 +23,12 @@ button {
   background: transparent;
 }
 
+.pagination:disabled{
+  background:  #fff;
+  color: #ccc;
+  cursor: no-drop;
+}
+
 form {
   margin: 15px;
 }
