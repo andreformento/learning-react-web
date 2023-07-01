@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
-import DropdownMenu from './DropdownMenu';
-import Parent from './Parent';
-import FunctionComponentExample from './FunctionComponentExample';
-import ExampleForm from './ExampleForm';
-import SigninForm from './SigninForm';
-import ContactUsForm from './ContactUsForm';
-import Container from './Container';
-// import axios from 'axios';
-import PhotoList from './PhotoList';
-import CrudWithApi from './CrudWithApi';
+// import DropdownMenu from './DropdownMenu';
+// import Parent from './Parent';
+// import FunctionComponentExample from './FunctionComponentExample';
+// import ExampleForm from './ExampleForm';
+// import SigninForm from './SigninForm';
+// import ContactUsForm from './ContactUsForm';
+// import Container from './Container';
+// // import axios from 'axios';
+// import PhotoList from './PhotoList';
+// import CrudWithApi from './CrudWithApi';
+import FirstRouter from './FirstRouter';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -45,20 +46,25 @@ const root = ReactDOM.createRoot(
 //   .then((data) => console.log(data))
 //   .catch(error => console.log(error));;
 
+// root.render(
+//   <React.StrictMode>
+//     <CrudWithApi />
+//     {/* <PhotoList />
+//     <Container />
+//     <ContactUsForm />
+//     <SigninForm />
+//     <ExampleForm />
+//     <FunctionComponentExample />
+//     <Parent />
+//     <DropdownMenu />
+//     <App /> */}
+//   </React.StrictMode>
+// );
+
 root.render(
   <React.StrictMode>
-    <CrudWithApi />
-    {/* <PhotoList />
-    <Container />
-    <ContactUsForm />
-    <SigninForm />
-    <ExampleForm />
-    <FunctionComponentExample />
-    <Parent />
-    <DropdownMenu />
-    <App /> */}
-  </React.StrictMode>
-);
+    <FirstRouter />
+  </React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

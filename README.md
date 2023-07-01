@@ -27,5 +27,5 @@
 - https://bezkoder.com/react-crud-web-api/
 - https://create-react-app.dev/docs/getting-started
 - https://create-react-app.dev/docs/adding-a-router
-- https://handsonreact.com/docs/routing
+- https://handsonreact.com/docs/build-deploy
 - https://reactjs.org/docs/dom-elements.html#differences-in-attributes

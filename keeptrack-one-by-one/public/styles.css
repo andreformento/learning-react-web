@@ -58,3 +58,31 @@ h3 {
   width: 50%;
 }
 
+
+
+.container {
+  border: 1px solid #ddd;
+  margin: 30px;
+  padding: 30px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li:after {
+  content: ' | ';
+}
+
+nav ul li:last-child:after {
+  content: '';
+}
+
+.active {
+  background-color: #bee5eb;
+  padding: 10px;
+}
