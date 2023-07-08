@@ -13,7 +13,7 @@ import reportWebVitals from './reportWebVitals';
 // // import axios from 'axios';
 // import PhotoList from './PhotoList';
 // import CrudWithApi from './CrudWithApi';
-import FirstRouter from './FirstRouter';
+import PhotoList2 from './PhotoList2';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -63,7 +63,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <FirstRouter />
+    <PhotoList2 />
   </React.StrictMode>);
 
 // If you want to start measuring performance in your app, pass a function
