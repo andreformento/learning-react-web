@@ -57,7 +57,7 @@ const photoAPI = {
   },
 };
 
-export default function PhotoList2() {
+function usePhotos() {
   const [loading, setLoading] = React.useState(false);
   const [photos, setPhotos] = React.useState([]);
   const [error, setError] = React.useState(null);
@@ -77,6 +77,12 @@ export default function PhotoList2() {
         setLoading(false);
       });
   }, []);
+
+  return { loading, photos, error };
+}
+
+export default function PhotoList2() {
+  const { loading, photos, error } = usePhotos();
 
   if (error) {
     return <div>{error}</div>;
