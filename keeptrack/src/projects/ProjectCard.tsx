@@ -1,4 +1,5 @@
 import { Project } from "./Project";
+import { Link } from 'react-router-dom';
 
 function formatDescription(description: string): string {
     return description.substring(0, 60) + '...';
@@ -19,7 +20,9 @@ function ProjectCard(props: ProjectCardProps) {
         <div className="card">
             <img src={project.imageUrl} alt={project.name} />
             <section className="section dark">
-                <h5><strong>{project.name}</strong></h5>
+                <Link to={'/projects/' + project.id}>
+                    <h5><strong>{project.name}</strong></h5>
+                </Link>
             </section>
             <p>{formatDescription(project.description)}</p>
             <p>Budget: {project.budget.toLocaleString()}</p>

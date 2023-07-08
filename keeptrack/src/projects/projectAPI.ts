@@ -22,7 +22,7 @@ function checkStatus(response: any) {
             statusText: response.statusText,
             url: response.url,
         };
-        console.log(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
+        console.error(`log server http error: ${JSON.stringify(httpErrorInfo)}`);
 
         let errorMessage = translateStatusToErrorMessage(httpErrorInfo.status);
         throw new Error(errorMessage);
@@ -58,7 +58,7 @@ const projectAPI = {
             .then(parseJSON)
             .then((data) => data.map(convertToProjectModel))
             .catch((error: TypeError) => {
-                console.log('log client error ' + error);
+                console.error('log client error ' + error);
                 throw new Error(
                     'There was an error retrieving the projects. Please try again.'
                 );
@@ -72,14 +72,20 @@ const projectAPI = {
                 'Content-Type': 'application/json'
             }
         })
-        .then(checkStatus)
-        .then(parseJSON)
-        .catch((error: TypeError) => {
-            console.error('log client error' + error);
-            throw new Error(
-                'There was an error updating the project. Please try again.'
-            );
-        });
+            .then(checkStatus)
+            .then(parseJSON)
+            .catch((error: TypeError) => {
+                console.error('log client error' + error);
+                throw new Error(
+                    'There was an error updating the project. Please try again.'
+                );
+            });
+    },
+    find(id: number) {
+        return fetch(`${url}/${id}`)
+            .then(checkStatus)
+            .then(parseJSON)
+            .then(convertToProjectModel);
     },
 };
 
