@@ -15,8 +15,6 @@ services:
       - ./keeptrack/src:/app/src
       - ./keeptrack/package.json:/app/package.json
       - ./keeptrack/tsconfig.json:/app/tsconfig.json
-    environment:
-      - BACKEND_BASE_URL=http://localhost:4000
     ports:
       - "3000:3000"
 
@@ -27,7 +25,5 @@ services:
       - ./keeptrack-one-by-one/src:/app/src
       - ./keeptrack-one-by-one/package.json:/app/package.json
       - ./keeptrack-one-by-one/tsconfig.json:/app/tsconfig.json
-    environment:
-      - BACKEND_BASE_URL=http://localhost:4000
     ports:
       - "3001:3000"
