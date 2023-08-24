@@ -2,13 +2,18 @@ version: '3'
 
 services:
   backend:
-    image: node:14
-    container_name: backend
-    
-    entrypoint: bash
-    user: "1000:1000"
+    build: backend/
     ports:
       - "4000:4000"
     volumes:
-      - ./backend:/app
-    working_dir: /app
+      - ./backend/db.json:/app/db.json
+
+  keeptrack:
+    build: keeptrack/
+    ports:
+      - "3000:3000"
+
+  keeptrack-one-by-one:
+    build: keeptrack-one-by-one/
+    ports:
+      - "3001:3000"
