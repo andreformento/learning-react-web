@@ -29,4 +29,4 @@
 - https://create-react-app.dev/docs/adding-a-router
 - https://handsonreact.com/docs/state-management#summary
 - https://reactjs.org/docs/dom-elements.html#differences-in-attributes
-- https://nextjs.org/learn-pages-router/foundations/from-javascript-to-react/displaying-data-with-props
+- https://nextjs.org/learn-pages-router/basics/assets-metadata-css/styling-tips
