@@ -30,3 +30,4 @@
 - https://handsonreact.com/docs/state-management#summary
 - https://reactjs.org/docs/dom-elements.html#differences-in-attributes
 - https://nextjs.org/learn-pages-router/basics/assets-metadata-css/styling-tips
+- [create a new nextjs project](https://nextjs.org/docs/pages/building-your-application/configuring/typescript)
