@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "This is an example site to demonstrate how to use NextAuth.js for authentication",
 }
 
-export default function RootLayout({ children }: React.PropsWithChildren) {
+export default async function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
       <body className={inter.className}>
