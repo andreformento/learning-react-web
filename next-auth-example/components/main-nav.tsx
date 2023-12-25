@@ -15,8 +15,11 @@ import {
 } from "./ui/navigation-menu"
 import React from "react"
 import { Button } from "./ui/button"
+import { auth } from "auth"
 
-export function MainNav() {
+export async function MainNav() {
+  const session = await auth()
+  // const isLoggedIn = session?.user!!;
   return (
     <div className="flex items-center space-x-2 lg:space-x-6">
       <CustomLink href="/">
@@ -42,6 +45,18 @@ export function MainNav() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+
+          {/* {isLoggedIn && (
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                href="/financial-hub"
+                className={navigationMenuTriggerStyle()}
+              >
+                Financial hub
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          )} */}
+
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/client-example"
