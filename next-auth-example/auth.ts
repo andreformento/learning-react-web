@@ -137,9 +137,14 @@ export const config = {
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl
       if (pathname === "/middleware-example") return !!auth
+      if (pathname === "/workspaces") return !!auth
       return true
     },
   },
 } satisfies NextAuthConfig
 
-export const { handlers, auth, signIn, signOut } = NextAuth(config)
+export const { 
+  handlers,
+  auth,
+  signIn,
+  signOut } = NextAuth(config)

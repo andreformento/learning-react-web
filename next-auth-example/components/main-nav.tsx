@@ -36,6 +36,9 @@ export function MainNav() {
                 <ListItem href="/middleware-example" title="Middleware Example">
                   Using Middleware to protect pages & APIs.
                 </ListItem>
+                <ListItem href="/workspaces" title="Workspaces">
+                  See all
+                </ListItem>
                 <ListItem href="/api-example" title="Route Handler Example">
                   Getting the session inside an API Route.
                 </ListItem>
