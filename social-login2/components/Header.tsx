@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut, useSession } from "next-auth/react";
+import Button from '@mui/material/Button';
 
 const Header: React.FC = () => {
   const router = useRouter();
@@ -118,14 +119,14 @@ const Header: React.FC = () => {
       <div className="left">
         <Link href="/" legacyBehavior>
           <a className="bold" data-active={isActive("/")}>
-            Feed
+            Home
           </a>
         </Link>
         <Link href="/drafts" legacyBehavior>
-          <a data-active={isActive("/drafts")}>My drafts</a>
+          <a data-active={isActive("/drafts")}>Drafts</a>
         </Link>
         <Link href="/workspaces" legacyBehavior>
-          <a data-active={isActive("/workspaces")}>My workspaces</a>
+          <a data-active={isActive("/workspaces")}>Workspaces</a>
         </Link>
         <style jsx>{`
           .bold {
@@ -151,21 +152,15 @@ const Header: React.FC = () => {
     right = (
       <div className="right">
         <p>
-          {session.user.name} ({session.user.email})
+          {session.user.name}
         </p>
-        <Link href="/create" legacyBehavior>
-          <button>
-            <a>New post</a>
-          </button>
+        <Link href="/create">
+          <Button variant="contained">New post</Button>
         </Link>
-        <Link href="/workspaces/create" legacyBehavior>
-          <button>
-            <a>New workspace</a>
-          </button>
+        <Link href="/workspaces/create">
+          <Button variant="contained">New workspace</Button>
         </Link>
-        <button onClick={() => signOut()}>
-          <a>Log out</a>
-        </button>
+        <Button variant="outlined" onClick={() => signOut()}>Log out</Button>
         <style jsx>{`
           a {
             text-decoration: none;
