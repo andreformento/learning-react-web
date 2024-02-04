@@ -16,6 +16,13 @@ model Post {
   authorId  Int?
 }
 
+model Workspace {
+  id        Int     @id @default(autoincrement())
+  title     String
+  owner     User?   @relation(fields: [ownerId], references: [id])
+  ownerId   Int?
+}
+
 model Account {
   id                 Int     @id @default(autoincrement())
   userId             Int     @map("user_id")
@@ -57,6 +64,7 @@ model User {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]
+  worskapces    Workspace[]
   accounts      Account[]
   sessions      Session[]
 

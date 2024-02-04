@@ -124,6 +124,9 @@ const Header: React.FC = () => {
         <Link href="/drafts" legacyBehavior>
           <a data-active={isActive("/drafts")}>My drafts</a>
         </Link>
+        <Link href="/workspaces" legacyBehavior>
+          <a data-active={isActive("/workspaces")}>My workspaces</a>
+        </Link>
         <style jsx>{`
           .bold {
             font-weight: bold;
@@ -153,6 +156,11 @@ const Header: React.FC = () => {
         <Link href="/create" legacyBehavior>
           <button>
             <a>New post</a>
+          </button>
+        </Link>
+        <Link href="/workspaces/create" legacyBehavior>
+          <button>
+            <a>New workspace</a>
           </button>
         </Link>
         <button onClick={() => signOut()}>
