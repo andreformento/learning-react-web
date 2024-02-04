@@ -3,7 +3,7 @@ include .env
 db-start:
 	@docker-compose up -d
 	@docker cp wait-for-it.sh my_postgres_container:/usr/local/bin/wait-for-it.sh
-	@docker exec -it my_postgres_container /usr/local/bin/wait-for-it.sh localhost:$(POSTGRES_PORT) -t 120
+	@docker exec -it my_postgres_container /usr/local/bin/wait-for-it.sh $(POSTGRES_HOST):$(POSTGRES_PORT) -t 120
 	@npm run migrate:dev
 
 db-stop:
@@ -19,5 +19,8 @@ start-app:
 
 list-tables:
 	@docker exec -it my_postgres_container psql -U $(POSTGRES_USER) -d $(POSTGRES_DB) -c "\dt"
+
+sql:
+	docker exec -it my_postgres_container psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 start: db-start start-app
