@@ -26,7 +26,11 @@ app.post('/users', async (req, res) => {
     }
 
     const user = await FeedService.createUser(userId, userData);
-    res.json({ success: true, user });
+    res.json({
+      success: true,
+      user,
+      message: user.created_at ? 'User created successfully' : 'User logged in successfully'
+    });
   } catch (error) {
     console.error('Error creating user:', error);
     res.status(500).json({ error: error.message });

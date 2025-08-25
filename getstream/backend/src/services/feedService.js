@@ -39,10 +39,36 @@ class FeedService {
   }
 
   static async createUser(userId, userData = {}) {
-    return await getUser(userId).create({
-      id: userId,
-      ...userData
-    });
+    try {
+      const user = await getUser(userId).create({
+        id: userId,
+        ...userData
+      })
+
+      // Return only the user data, not the full Stream client object
+      return {
+        id: user.id,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        ...userData
+      }
+    } catch (error) {
+      if (error.message && error.message.includes('already exists')) {
+        try {
+          const existingUser = await getUser(userId).get()
+          // Return only the user data for existing users
+          return {
+            id: existingUser.id,
+            created_at: existingUser.created_at,
+            updated_at: existingUser.updated_at,
+            ...userData
+          }
+        } catch (getError) {
+          throw new Error(`User exists but cannot be retrieved: ${getError.message}`)
+        }
+      }
+      throw error
+    }
   }
 
   static async updateUser(userId, userData) {

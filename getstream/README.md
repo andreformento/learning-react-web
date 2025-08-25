@@ -1,110 +1,101 @@
-# Stream Feeds Node.js Project
+# Stream Feeds & Chat Project
 
-This project demonstrates how to use the Stream Feeds Node SDK to build activity feeds and social features.
+Full-stack app with Node.js backend and React frontend using Stream's Activity Feeds and Chat SDKs.
 
-## Prerequisites
+## Quick Start
 
-- Node.js (v14 or higher)
-- npm or yarn
-- Stream account and API credentials
+### 1. Environment Setup
 
-## Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd getstream
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   - Copy `.env.example` to `.env`
-   - Fill in your Stream API credentials:
-     - `STREAM_API_KEY`: Your Stream API key
-     - `STREAM_API_SECRET`: Your Stream API secret
-     - `STREAM_APP_ID`: Your Stream app ID
-     - `PORT`: Server port (default: 3000)
-
-4. **Get your Stream credentials**
-   - Sign up at [getstream.io](https://getstream.io)
-   - Create a new app
-   - Copy your API key, secret, and app ID from the dashboard
-
-## Usage
-
-### Development
+#### Backend Environment Variables
 ```bash
+cd backend
+cp .sample.env .env
+# Edit .env with your Stream API credentials:
+```
+
+**Required Backend Variables:**
+- `STREAM_API_KEY` - Your Stream API key
+- `STREAM_API_SECRET` - Your Stream API secret
+- `STREAM_APP_ID` - Your Stream app ID
+- `STREAM_REGION` - Stream region (default: us-east)
+- `PORT` - Backend server port (default: 3000)
+- `NODE_ENV` - Environment (development/production)
+
+#### Frontend Environment Variables
+```bash
+cd frontend
+cp env.example .env
+# Edit .env with your Stream API credentials:
+```
+
+**Required Frontend Variables:**
+- `VITE_STREAM_API_KEY` - Your Stream API key (must start with VITE_)
+- `VITE_STREAM_API_SECRET` - Your Stream API secret
+- `VITE_STREAM_APP_ID` - Your Stream app ID
+- `VITE_STREAM_REGION` - Stream region (default: us-east)
+- `VITE_BACKEND_URL` - Backend API URL (default: http://localhost:3000)
+
+**Important:** Frontend environment variables MUST start with `VITE_` to be accessible in the browser.
+
+### 2. Backend
+```bash
+cd backend
+npm install
 npm run dev
+# Server runs on http://localhost:3000
 ```
 
-### Production
+### 3. Frontend
 ```bash
-npm start
+cd frontend
+npm install
+npm run dev
+# App runs on http://localhost:3001
 ```
 
-### Run examples
+## Environment Variable References
+
+### Backend (.env)
 ```bash
-node examples/basic-feeds.js
-node examples/user-activities.js
+# Stream Feeds Configuration
+STREAM_API_KEY=your_api_key_here
+STREAM_API_SECRET=your_api_secret_here
+STREAM_APP_ID=your_app_id_here
+STREAM_REGION=us-east
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
 ```
 
-## Project Structure
+### Frontend (.env)
+```bash
+# Stream API Configuration
+VITE_STREAM_API_KEY=your_stream_api_key
+VITE_STREAM_API_SECRET=your_stream_api_secret
+VITE_STREAM_APP_ID=your_stream_app_id
+VITE_STREAM_REGION=us-east
 
-```
-getstream/
-├── src/
-│   ├── config/
-│   │   └── stream.js          # Stream SDK configuration
-│   ├── services/
-│   │   └── feedService.js     # Feed operations service
-│   └── server.js              # Express server setup
-├── examples/
-│   ├── basic-feeds.js         # Basic feed operations
-│   └── user-activities.js     # User activity examples
-├── .env                       # Environment variables
-├── package.json               # Project dependencies
-└── README.md                  # This file
+# Backend API URL
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
-## Features
+## API Endpoints
+- `GET /health` - Health check
+- `POST /users` - Create user
+- `POST /feeds/:group/:id/activities` - Add activity
+- `GET /feeds/:group/:id/activities` - Get activities
+- `POST /feeds/:group/:id/follow` - Follow feed
+- `POST /feeds/:group/:id/unfollow` - Unfollow feed
+- `DELETE /feeds/:group/:id/activities/:activityId` - Remove activity
 
-- ✅ Stream Feeds SDK integration
-- ✅ Environment configuration
-- ✅ Basic feed operations
-- ✅ User activity management
-- ✅ Express server setup
-- ✅ Development tools (nodemon)
+## Technologies
+- **Backend**: Node.js, Express, Stream Node SDK
+- **Frontend**: React, TypeScript, Stream JS SDK, Vite
 
-## API Examples
-
-### Creating a feed
-```javascript
-const { StreamChat } = require('getstream');
-
-const client = StreamChat.getInstance(apiKey, apiSecret);
-const userFeed = client.feed('user', 'user-id');
-```
-
-### Adding activities
-```javascript
-await userFeed.addActivity({
-  actor: 'user:123',
-  verb: 'post',
-  object: 'post:456',
-  foreign_id: 'post:456'
-});
-```
-
-## Documentation
-
-- [Stream Feeds Node.js Documentation](https://getstream.io/activity-feeds/docs/node/installation.md)
-- [Stream Dashboard](https://dashboard.getstream.io/)
-- [API Reference](https://getstream.io/activity-feeds/docs/node/)
-
-## License
-
-ISC
+## Stream Dashboard Setup
+Before running the app, ensure these feed groups are created in your Stream Dashboard:
+- `user` - User-specific feeds
+- `flat` - Flat activity feeds
+- `timeline` - Timeline feeds
+- `aggregated` - Aggregated feeds

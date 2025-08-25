@@ -68,7 +68,8 @@ describe('Server Integration Tests', () => {
       expect(FeedService.createUser).toHaveBeenCalledWith('user-123', userData);
       expect(response.body).toEqual({
         success: true,
-        user: mockUser
+        user: mockUser,
+        message: 'User logged in successfully'
       });
     });
 
