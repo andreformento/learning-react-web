@@ -1,101 +1,80 @@
-# Stream Feeds & Chat Project
+# Stream Chat Backend
 
-Full-stack app with Node.js backend and React frontend using Stream's Activity Feeds and Chat SDKs.
+Simple NestJS backend for Stream Chat functionality.
 
-## Quick Start
+## Setup
 
-### 1. Environment Setup
-
-#### Backend Environment Variables
+1. Copy `.env.sample` to `.env` and fill in your Stream credentials:
 ```bash
-cd backend
-cp .sample.env .env
-# Edit .env with your Stream API credentials:
+cp .env.sample .env
 ```
 
-**Required Backend Variables:**
-- `STREAM_API_KEY` - Your Stream API key
-- `STREAM_API_SECRET` - Your Stream API secret
-- `STREAM_APP_ID` - Your Stream app ID
-- `STREAM_REGION` - Stream region (default: us-east)
-- `PORT` - Backend server port (default: 3000)
-- `NODE_ENV` - Environment (development/production)
-
-#### Frontend Environment Variables
-```bash
-cd frontend
-cp env.example .env
-# Edit .env with your Stream API credentials:
+2. Edit `.env` with your actual Stream credentials:
 ```
-
-**Required Frontend Variables:**
-- `VITE_STREAM_API_KEY` - Your Stream API key (must start with VITE_)
-- `VITE_STREAM_API_SECRET` - Your Stream API secret
-- `VITE_STREAM_APP_ID` - Your Stream app ID
-- `VITE_STREAM_REGION` - Stream region (default: us-east)
-- `VITE_BACKEND_URL` - Backend API URL (default: http://localhost:3000)
-
-**Important:** Frontend environment variables MUST start with `VITE_` to be accessible in the browser.
-
-### 2. Backend
-```bash
-cd backend
-npm install
-npm run dev
-# Server runs on http://localhost:3000
-```
-
-### 3. Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-# App runs on http://localhost:3001
-```
-
-## Environment Variable References
-
-### Backend (.env)
-```bash
-# Stream Feeds Configuration
-STREAM_API_KEY=your_api_key_here
-STREAM_API_SECRET=your_api_secret_here
-STREAM_APP_ID=your_app_id_here
+STREAM_API_KEY=your_actual_api_key
+STREAM_API_SECRET=your_actual_api_secret
+STREAM_APP_ID=your_actual_app_id
 STREAM_REGION=us-east
-
-# Server Configuration
 PORT=3000
-NODE_ENV=development
 ```
 
-### Frontend (.env)
-```bash
-# Stream API Configuration
-VITE_STREAM_API_KEY=your_stream_api_key
-VITE_STREAM_API_SECRET=your_stream_api_secret
-VITE_STREAM_APP_ID=your_stream_app_id
-VITE_STREAM_REGION=us-east
+## Run Application
 
-# Backend API URL
-VITE_BACKEND_URL=http://localhost:3000
+```bash
+# Development mode with auto-reload
+npm run start:dev
+
+# Production mode
+npm run start
+```
+
+## Test the Backend
+
+Run the test script to verify all endpoints work:
+
+```bash
+# Simple test (no dependencies)
+./test-chat-simple.sh
+
+# Test with jq formatting (requires jq)
+./test-chat.sh
+```
+
+## Manual Testing with curl
+
+```bash
+# Health check
+curl http://localhost:3000/chat/health
+
+# Create user token
+curl -X POST http://localhost:3000/chat/users/token \
+  -H "Content-Type: application/json" \
+  -d '{"userId": "testuser123"}'
+
+# Create user
+curl -X POST http://localhost:3000/chat/users \
+  -H "Content-Type: application/json" \
+  -d '{"userId": "testuser123", "userData": {"name": "Test User"}}'
+
+# Create channel
+curl -X POST http://localhost:3000/chat/channels \
+  -H "Content-Type: application/json" \
+  -d '{"channelType": "messaging", "channelId": "test-channel", "members": ["testuser123"]}'
+
+# Send message
+curl -X POST http://localhost:3000/chat/channels/messaging/test-channel/messages \
+  -H "Content-Type: application/json" \
+  -d '{"text": "Hello World!", "userId": "testuser123"}'
+
+# Get messages
+curl http://localhost:3000/chat/channels/messaging/test-channel/messages?limit=10
 ```
 
 ## API Endpoints
-- `GET /health` - Health check
-- `POST /users` - Create user
-- `POST /feeds/:group/:id/activities` - Add activity
-- `GET /feeds/:group/:id/activities` - Get activities
-- `POST /feeds/:group/:id/follow` - Follow feed
-- `POST /feeds/:group/:id/unfollow` - Unfollow feed
-- `DELETE /feeds/:group/:id/activities/:activityId` - Remove activity
 
-## Technologies
-- **Backend**: Node.js, Express, Stream Node SDK
-- **Frontend**: React, TypeScript, Stream JS SDK, Vite
-
-## Stream Dashboard Setup
-Before running the app, ensure these feed groups are created in your Stream Dashboard:
-- `user` - User-specific feeds
-- `flat` - Flat activity feeds
-- `timeline` - Timeline feeds
-- `aggregated` - Aggregated feeds
+- `GET /chat/health` - Health check
+- `POST /chat/users/token` - Generate user token
+- `POST /chat/users` - Create/update user
+- `POST /chat/channels` - Create channel
+- `POST /chat/channels/:channelType/:channelId/messages` - Send message
+- `GET /chat/channels/:channelType/:channelId/messages` - Get messages
