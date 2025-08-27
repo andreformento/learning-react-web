@@ -116,4 +116,28 @@ export class StreamChatService implements OnModuleInit {
       throw new Error(`Message retrieval failed: ${errorMsg}`);
     }
   }
+
+  async listChannels(userId: string) {
+    try {
+      console.log(`📋 Listing channels for user: ${userId}`);
+
+      const response = await this.serverClient.queryChannels(
+        { members: { $in: [userId] } },
+        undefined,
+        { limit: 100 }
+      );
+
+      console.log(`✅ Retrieved ${response.length} channels for user ${userId}`);
+      return response.map(channel => ({
+        id: channel.id,
+        name: channel.id,
+        members: [userId],
+        created_at: new Date().toISOString()
+      }));
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || error.message;
+      console.error(`❌ Failed to list channels for user ${userId}: ${errorMsg}`);
+      throw new Error(`Channel listing failed: ${errorMsg}`);
+    }
+  }
 }

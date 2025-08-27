@@ -59,6 +59,11 @@ export class StreamChatController {
     );
   }
 
+  @Get('channels')
+  async listChannels(@Query('userId') userId: string) {
+    return await this.streamChatService.listChannels(userId);
+  }
+
   @Get('health')
   async health() {
     return {

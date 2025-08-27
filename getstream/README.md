@@ -1,80 +1,34 @@
-# Stream Chat Backend
+# Stream Chat Project
 
-Simple NestJS backend for Stream Chat functionality.
+NestJS backend + Flutter frontend for Stream Chat.
 
-## Setup
+## Quick Start
 
-1. Copy `.env.sample` to `.env` and fill in your Stream credentials:
+### Backend
 ```bash
-cp .env.sample .env
+cd backend
+cp .env.sample .env  # Add your Stream credentials
+npm install
+npm run start:dev    # Runs on port 3000
 ```
 
-2. Edit `.env` with your actual Stream credentials:
-```
-STREAM_API_KEY=your_actual_api_key
-STREAM_API_SECRET=your_actual_api_secret
-STREAM_APP_ID=your_actual_app_id
-STREAM_REGION=us-east
-PORT=3000
-```
-
-## Run Application
-
+### Flutter App
 ```bash
-# Development mode with auto-reload
-npm run start:dev
-
-# Production mode
-npm run start
+cd flutter
+flutter pub get
+flutter run -d chrome --web-port 8080  # Runs on port 8080
 ```
 
-## Test the Backend
+## Usage
 
-Run the test script to verify all endpoints work:
+1. Start backend and Flutter app
+2. Login with any user ID (e.g., "john_doe")
+3. Create a channel (e.g., "general-chat")
+4. Start chatting!
+
+## Test Backend
 
 ```bash
-# Simple test (no dependencies)
+cd backend
 ./test-chat-simple.sh
-
-# Test with jq formatting (requires jq)
-./test-chat.sh
 ```
-
-## Manual Testing with curl
-
-```bash
-# Health check
-curl http://localhost:3000/chat/health
-
-# Create user token
-curl -X POST http://localhost:3000/chat/users/token \
-  -H "Content-Type: application/json" \
-  -d '{"userId": "testuser123"}'
-
-# Create user
-curl -X POST http://localhost:3000/chat/users \
-  -H "Content-Type: application/json" \
-  -d '{"userId": "testuser123", "userData": {"name": "Test User"}}'
-
-# Create channel
-curl -X POST http://localhost:3000/chat/channels \
-  -H "Content-Type: application/json" \
-  -d '{"channelType": "messaging", "channelId": "test-channel", "members": ["testuser123"]}'
-
-# Send message
-curl -X POST http://localhost:3000/chat/channels/messaging/test-channel/messages \
-  -H "Content-Type: application/json" \
-  -d '{"text": "Hello World!", "userId": "testuser123"}'
-
-# Get messages
-curl http://localhost:3000/chat/channels/messaging/test-channel/messages?limit=10
-```
-
-## API Endpoints
-
-- `GET /chat/health` - Health check
-- `POST /chat/users/token` - Generate user token
-- `POST /chat/users` - Create/update user
-- `POST /chat/channels` - Create channel
-- `POST /chat/channels/:channelType/:channelId/messages` - Send message
-- `GET /chat/channels/:channelType/:channelId/messages` - Get messages
